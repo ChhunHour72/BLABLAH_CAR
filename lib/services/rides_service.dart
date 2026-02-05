@@ -10,13 +10,13 @@ class RidesService {
   static List<Ride> availableRides = fakeRides; // TODO for now fake data
 
   static List<Ride> filterByDeparture(Location departure) {
-    return [];
+    return availableRides.where((ride) => ride.departureLocation==(departure)).toList();
   }
     static List<Ride> filterBySeatRequested(Location departure) {
-    return [];
+    return availableRides.where((ride) => ride.availableSeats==(departure)).toList();
   }
 
     static List<Ride> filterBy({Location? departure, int? seatRequested}) {
-    return [];
+    return availableRides.where((ride) => ride==(departure,seatRequested)).toList();
   }
 }
