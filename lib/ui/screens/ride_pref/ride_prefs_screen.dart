@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../theme/theme.dart';
 import 'widgets/ride_prefs_form.dart';
 import 'widgets/ride_prefs_tile.dart';
+import '../../widgets/actions/bla_button.dart';
 
 const String blablaHomeImagePath = 'assets/images/blabla_home.png';
 
@@ -53,6 +54,9 @@ class RidePrefsScreen extends StatelessWidget {
               RidePrefForm(initRidePref: RidePrefsService.selectedRidePref),
               SizedBox(height: BlaSpacings.m),
 
+              //Impletement BlaButton
+              BlaButton(label: 'Search', backgroundColor: BlaColors.primary ,textColor: Colors.white,),
+              
               // 3 - THE HISTORY 
               SizedBox(
                 height: 200, // Set a fixed height
