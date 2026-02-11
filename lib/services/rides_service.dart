@@ -12,11 +12,22 @@ class RidesService {
   static List<Ride> filterByDeparture(Location departure) {
     return availableRides.where((ride) => ride.departureLocation==(departure)).toList();
   }
-    static List<Ride> filterBySeatRequested(Location departure) {
-    return availableRides.where((ride) => ride.availableSeats==(departure)).toList();
+    static List<Ride> filterBySeatRequested(int seatRequested) {
+    return availableRides.where((ride) => ride.availableSeats >= seatRequested).toList();
   }
 
     static List<Ride> filterBy({Location? departure, int? seatRequested}) {
-    return availableRides.where((ride) => ride==(departure,seatRequested)).toList();
+    if (departure != null && seatRequested != null){
+    return availableRides.where((ride) => 
+    ride.departureLocation.name == departure.name &&
+    ride.availableSeats >= seatRequested).toList();
+   }
+   if(departure != null){
+    return availableRides.where((ride) => ride.departureLocation.name == departure.name).toList();
+   }
+   if (seatRequested != null){
+    return availableRides.where((ride) => ride.availableSeats >= seatRequested).toList();
+   }
+   return availableRides;
   }
 }
