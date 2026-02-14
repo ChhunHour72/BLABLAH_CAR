@@ -5,6 +5,7 @@ import '../../../../model/ride_pref/ride_pref.dart';
 import 'package:blabla/utils/date_time_utils.dart';
 import 'package:blabla/ui/widgets/display/bla_divider.dart';
 import 'package:blabla/ui/theme/theme.dart';
+import '../ride_location_picker_screen.dart';
 ///
 /// A Ride Preference From is a view to select:
 ///   - A depcarture location
@@ -51,8 +52,20 @@ class _RidePrefFormState extends State<RidePrefForm> {
 
 
    void selectDeparture() async {
+    final picked = await Navigator.of(context).push<Location>(
+      MaterialPageRoute(builder: (_) => const RideLocationPicker()),
+    );
+    if (picked != null) {
+      setState(() => departure = picked);
+    }
   }
   void selectArrival() async {
+    final picked = await Navigator.of(context).push<Location>(
+      MaterialPageRoute(builder: (_) => const RideLocationPicker()),
+    );
+    if (picked != null) {
+      setState(() => arrival = picked);
+    }
   }
   
   void swapLocation() async {
