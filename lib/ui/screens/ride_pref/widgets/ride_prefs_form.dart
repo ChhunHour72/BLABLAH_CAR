@@ -56,8 +56,25 @@ class _RidePrefFormState extends State<RidePrefForm> {
   }
   
   void swapLocation() async {
+    setState(() {
+      // only sswap if both departure and arrivate are define
+      if (departure != null && arrival != null) {
+        Location temp = departure!;
+        departure = Location.copy(arrival!);
+        arrival = Location.copy(temp);
+      }
+    });
   }
   void selectDate() async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: departureDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+    );
+    if (picked != null) {
+      setState(() => departureDate = picked);
+    }
   }
   // ----------------------------------
   // Compute the widgets rendering
@@ -124,7 +141,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
           right: 10,
           top: 15,
           child: InkWell(
-            onTap: (){},
+            onTap: swapLocation,
             borderRadius: BorderRadius.circular(20),
             child: Padding(
               padding: const EdgeInsets.all(6),
